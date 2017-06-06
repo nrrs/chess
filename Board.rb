@@ -17,13 +17,29 @@ class Board
     end
   end
 
-  def [](row_input, col_input)
-    row, col = row_input, col_input
+  def [](pos)
+    row, col = pos
     board[row][col]
+  end
+
+  def []=(pos, piece)
+    row, col = pos
+    board[row][col] = piece
+  end
+
+  def move_piece(start_pos)
+    row, col = start_pos
+    p board[row][col]
+    if board[row][col].nil?
+      raise 'There is no piece at #{start_pos}'
+    else
+      puts 'Where do you want to go?'
+    end
   end
 
 end
 
 if __FILE__ == $PROGRAM_NAME
   game = Board.new
+  p game.move_piece([0,0])
 end
