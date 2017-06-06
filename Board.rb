@@ -27,13 +27,19 @@ class Board
     board[row][col] = piece
   end
 
-  def move_piece(start_pos)
-    row, col = start_pos
-    p board[row][col]
-    if board[row][col].nil?
-      raise 'There is no piece at #{start_pos}'
+  def move_piece(start_pos, end_pos)
+    row_start, col_start = start_pos
+    row_end, col_end = end_pos
+    start_move = board[row_start][col_start]
+    end_move = board[row_end][col_end]
+
+    if start_move.nil?
+      raise 'THERE IS NO PIECE AT #{start_pos} FOR YOU TO MOVE.'
+    elsif !end_move.nil?
+      raise 'YOU CANNOT MOVE TO #{end_pos}. THIS POSITION IS ALREADY TAKEN.'
     else
-      puts 'Where do you want to go?'
+      @board[row_end][col_end] = start_move
+      @board[row_start][col_start] = nil
     end
   end
 
@@ -41,5 +47,6 @@ end
 
 if __FILE__ == $PROGRAM_NAME
   game = Board.new
-  p game.move_piece([0,0])
+  p game.move_piece([0,0], [3,0])
+  p game.board
 end
