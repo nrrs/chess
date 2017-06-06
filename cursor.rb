@@ -78,28 +78,29 @@ class Cursor
   def handle_key(key)
     case key
     when :space
-      return @cursor
+      return @cursor_pos
     when :left
       update_pos([0, -1])
-      return nil
+      nil
     when :down
       update_pos([1, 0])
-      return nil
+      nil
     when :up
       update_pos([-1, 0])
-      return nil
+      nil
     when :right
       update_pos([0, 1])
-      return nil
+      nil
     when :tab
     when :return
-      return @cursor
+      return @cursor_pos
     when :newline
     when :escape
     when :backspace
     when :delete
     when :ctrl_c
       Process.exit
+    end
   end
 
   def update_pos(diff)

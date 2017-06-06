@@ -42,7 +42,7 @@ end
 
 if __FILE__ == $PROGRAM_NAME
   game = Board.new
-  game[[0, 0]]
-  p game.move_piece([0,0], [0,2])
-  p game.board
+  # game[[0, 0]]
+  # p game.move_piece([0,0], [0,2])
+  # p game.board
 end
