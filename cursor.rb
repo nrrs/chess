@@ -104,5 +104,11 @@ class Cursor
   end
 
   def update_pos(diff)
+    if @board.in_bounds(diff)
+      @cursor_pos = diff
+      @cursor_pos.colorize(:green)
+    else
+      raise 'THIS POSITION IS OUT OF BOUNDS!'
+    end
   end
 end
