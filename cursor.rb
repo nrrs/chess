@@ -118,12 +118,5 @@ class Cursor
     else
       puts "This position is out of bounds. Please try again."
     end
-
-    # begin
-    #   @cursor_pos = new_pos if @board.in_bounds(new_pos)
-    # rescue
-    #   puts 'THIS POSITION IS OUT OF BOUNDS! TRY AGAIN!'
-    #   retry
-    # end
   end
 end
