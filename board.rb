@@ -19,7 +19,7 @@ class Board
               (row == @grid.length - 1 || row == @grid.length - 2)
           grid[row][col] = 'X' #Piece.new
         else
-          grid[row][col] = nil
+          grid[row][col] = "_"
         end
       end
     end
@@ -48,15 +48,17 @@ class Board
     end
   end
 
-  def in_bounds(diff_pos)
-    x, y = diff_pos
-    return true if (x >= 0 || x <= 7) && (y >= 0 || y <= 7)
+  def in_bounds(new_pos)
+    x, y = new_pos
+    bounds = (0..7).to_a
+
+    return true if bounds.include?(x) && bounds.include?(y)
     false
   end
 end
 
 if __FILE__ == $PROGRAM_NAME
   game = Board.new
-  # p game.move_piece([0,0], [0,2])
+  p game.move_piece([0, 0], [2, 0])
   # p game.grid
 end

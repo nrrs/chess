@@ -93,6 +93,7 @@ class Cursor
       nil
     when :tab
     when :return
+      # toggle_selected
       return @cursor_pos
     when :newline
     when :escape
@@ -103,12 +104,26 @@ class Cursor
     end
   end
 
+  def toggle_selected
+    board[@cursor_pos] = board[@cursor_pos].colorize(background: :green)
+  end
+
   def update_pos(diff)
-    if @board.in_bounds(diff)
-      @cursor_pos = diff
-      @cursor_pos.colorize(:green)
+    ori_row, ori_col = @cursor_pos.first, @cursor_pos.last
+    adj_row, adj_col = diff.first, diff.last
+    new_pos = [(ori_row + adj_row), (ori_col + adj_col)]
+
+    if @board.in_bounds(new_pos)
+      @cursor_pos = new_pos
     else
-      raise 'THIS POSITION IS OUT OF BOUNDS!'
+      puts "This position is out of bounds. Please try again."
     end
+
+    # begin
+    #   @cursor_pos = new_pos if @board.in_bounds(new_pos)
+    # rescue
+    #   puts 'THIS POSITION IS OUT OF BOUNDS! TRY AGAIN!'
+    #   retry
+    # end
   end
 end

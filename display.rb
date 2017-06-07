@@ -13,24 +13,35 @@ class Display
   end
 
   def render
-    cur_cur = @cursor.cursor_pos
-
-    board.rows.each_with_index do |row, i|
-      row.each_with_index do |piece, j|
-        if piece.nil?
-          print " _ "
-          next
-        end
-
-        if cur_cur == [i, j]
-          print " #{piece.colorize(background: :green)} "
-        else
-          print " #{piece} "
-        end
-      end
+    while true
+      current_cursor = @cursor.cursor_pos
 
       puts
+      puts
+      puts "-----------------------"
+      board.rows.each_with_index do |row, row_idx|
+        row.each_with_index do |piece, piece_idx|
+          colorize_piece(current_cursor, row_idx, piece_idx)
+        end
+        puts
+      end
+      puts "-----------------------"
+      puts
+      puts
+
+      @cursor.get_input
     end
   end
+
+  def colorize_piece(cursor, row, piece)
+    current_piece = board[[row, piece]]
+
+    if cursor == [row, piece]
+      print " #{current_piece.colorize(background: :blue)} "
+    else
+      print " #{current_piece} "
+    end
+  end
+
 
 end
